@@ -1,0 +1,17 @@
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N Correct
+#$ -cwd
+#$ -e ./result/mock.log
+#$ -o ./result/mock.dat
+#$ -V
+REFERENCE_SIZES="3,10,15,20,50,100,500,1000"
+ECOLIREF=./data/reference.fa
+MODELPATH=./data/template.model
+QUERIES=./data/queries.dat
+
+QUERYSIZE=250
+METHOD="SUBNORMAL NORMAL"
+
+./target/release/datagenerator $QUERIES $MODELPATH $ECOLIREF $QUERYSIZE $REFERENCE_SIZES $METHOD CORRECT
+./target/release/datagenerator $QUERIES $MODELPATH $ECOLIREF $QUERYSIZE $REFERENCE_SIZES $METHOD UNCORRECT

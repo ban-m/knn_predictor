@@ -1,0 +1,14 @@
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N kNN-sub
+#$ -cwd
+#$ -e ./result/knn-sub.log
+#$ -o ./result/knn-sub.csv
+#$ -t 1-8:1
+#$ -V
+CORRECT_DATA=./result/SubHillNormal450CORRECT.csv
+WRONG_DATA=./result/SubHillNormal450UNCORRECT.csv
+REFERENCE_SIZES=(0 3 10 15 20 50 100 500 1000)
+REFERENCE_SIZE=${REFERENCE_SIZES[$SGE_TASK_ID]}
+
+./target/release/knn $REFERENCE_SIZE $CORRECT_DATA $WRONG_DATA subhillnormal

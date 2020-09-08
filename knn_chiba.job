@@ -1,0 +1,13 @@
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N kNN-chiba
+#$ -cwd
+#$ -e ./result/knn-chiba.log
+#$ -o ./result/knn-chiba.csv
+#$ -t 1-8:1
+#$ -V
+CORRECT_DATA=./result/ChibaNormalFlat1000CORRECT.csv
+WRONG_DATA=./result/ChibaNormalFlat1000UNCORRECT.csv
+REFERENCE_SIZES=(0 3 10 15 20 50 100 500 1000)
+REFERENCE_SIZE=${REFERENCE_SIZES[$SGE_TASK_ID]}
+./target/release/knn $REFERENCE_SIZE $CORRECT_DATA $WRONG_DATA chiba

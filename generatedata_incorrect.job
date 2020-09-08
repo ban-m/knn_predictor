@@ -1,0 +1,19 @@
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N UNcorrect
+#$ -cwd
+#$ -e ./result/optimal.log
+#$ -o ./result/optimal_output.dat
+#$ -t 1-2:1
+#$ -V
+METHODS=("DUMMY NORMAL" "CHIBANORMAL FLAT" "SUBHILL NORMAL")
+QUERY_SIZES=(00 1000 450)
+REFERENCE_SIZES="3,10,15,20,50,100,500,1000"
+ECOLIREF=./data/reference.fa
+MODELPATH=./data/template.model
+QUERIES=./data/queries.dat
+
+QUERYSIZE=${QUERY_SIZES[$SGE_TASK_ID]}
+METHOD=${METHODS[$SGE_TASK_ID]}
+
+./target/release/datagenerator $QUERIES $MODELPATH $ECOLIREF $QUERYSIZE $REFERENCE_SIZES $METHOD UNCORRECT

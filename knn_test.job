@@ -1,0 +1,12 @@
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N kNN-test
+#$ -cwd
+#$ -e ./result/knn-test.log
+#$ -o ./result/knn-test.csv
+#$ -V
+CORRECT_DATA="./result/SubHillNormal450TEST.csv"
+WRONG_DATA="./result/SubHillNormal450TEST.csv"
+REFERENCE_SIZE=3
+
+./target/release/knn $REFERENCE_SIZE $CORRECT_DATA $WRONG_DATA test
