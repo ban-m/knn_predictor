@@ -92,7 +92,6 @@ impl KNN{
 
 fn compute_n_folds(dataset:&Vec<(f64,bool)>,n:usize) ->Vec<(Vec<(f64,bool)>,Vec<(f64,bool)>)>{
     let window_size = dataset.len()/n;
-    use std::vec::Vec;
     let mut result = Vec::with_capacity(n);
     for i in 0..(n-1){
         let testset:Vec<_> = dataset[i*window_size..(i+1)*window_size].iter().map(|e|e.clone()).collect();
